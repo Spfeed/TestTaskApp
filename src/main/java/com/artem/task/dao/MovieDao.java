@@ -44,4 +44,10 @@ public class MovieDao {
         String sql = "DELETE FROM movies WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
+    //Фильтрация фильмов по слову в названии
+    public List<Movie> findByTitleContaining(String keyword)  {
+        String sql = "SELECT * FROM movies WHERE title ILIKE ? ORDER BY id DESC";//ILIKE позволяет игнорировать регистр
+        String query = "%" + keyword + "%";//Обеспечение поиска в любом месте строки
+        return jdbcTemplate.query(sql, new MovieRowMapper(), query);
+    }
 }

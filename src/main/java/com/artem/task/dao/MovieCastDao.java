@@ -2,6 +2,7 @@ package com.artem.task.dao;
 
 import com.artem.task.model.Movie;
 import com.artem.task.model.MovieCast;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,8 +19,12 @@ public class MovieCastDao {
     //CRUD
     //Поиск персонажа по id фильма и id актера
     public MovieCast findByMovieIdAndActorId(Long movieId, Long actorId) {
-        String sql = "SELECT * FROM movie_cast WHERE movie_id = ?, actor_id = ?";
-        return jdbcTemplate.queryForObject(sql, new MovieCastRowMapper(), movieId, actorId);
+        String sql = "SELECT * FROM movie_cast WHERE movie_id = ? AND actor_id = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new MovieCastRowMapper(), movieId, actorId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
     //Поиск всех персонажей из фильма по его id
     public List<MovieCast> findByMovieId(Long movieId) {
