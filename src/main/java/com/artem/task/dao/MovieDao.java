@@ -17,9 +17,9 @@ public class MovieDao {
     }
 
     //CRUD
-    //Вывод всех фильмов
+    //Вывод всех фильмов от последнего к первому
     public List<Movie> findAll() {
-        String sql = "SELECT * FROM movies";
+        String sql = "SELECT * FROM movies ORDER BY id DESC"; //вывод в обратном порядке
         return jdbcTemplate.query(sql, new MovieRowMapper());
     }
     //Поиск фильма по id
