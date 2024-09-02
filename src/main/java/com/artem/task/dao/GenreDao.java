@@ -1,6 +1,7 @@
 package com.artem.task.dao;
 
 import com.artem.task.model.Genre;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -39,5 +40,14 @@ public class GenreDao {
     public void delete(Long id){
         String sql = "DELETE FROM genres WHERE id = ?";
         jdbcTemplate.update(sql, id);
+    }
+    //Поиск по названию
+    public Genre findByName(String name) {
+        String sql = "SELECT * FROM genres WHERE name = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new GenreRowMapper(), name);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }

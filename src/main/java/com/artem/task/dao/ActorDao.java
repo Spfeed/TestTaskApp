@@ -40,4 +40,19 @@ public class ActorDao {
         String sql = "DELETE FROM actors WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
+    //Поиск актеров по имени и фамилии
+    public List<Actor> findByFullName(String firstName, String lastName) {
+        String sql = "SELECT * FROM actors WHERE LOWER (name) = LOWER (?) AND LOWER (last_name) = LOWER (?)";
+        return jdbcTemplate.query(sql, new ActorRowMapper(), firstName, lastName);
+    }
+    //Поиск актеров по имени
+    public List<Actor> findByFirstName(String firstName) {
+        String sql = "SELECT * FROM actors WHERE LOWER (name) = LOWER (?)";
+        return jdbcTemplate.query(sql, new ActorRowMapper(), firstName);
+    }
+    //Поиск актеров по фамилии
+    public List<Actor> findByLastName(String lastName) {
+        String sql = "SELECT * FROM actors WHERE LOWER (last_name) = LOWER (?)";
+        return jdbcTemplate.query(sql, new ActorRowMapper(), lastName);
+    }
 }
