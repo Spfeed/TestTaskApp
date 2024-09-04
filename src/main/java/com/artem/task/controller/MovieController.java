@@ -5,6 +5,7 @@ import com.artem.task.dto.MovieDTO;
 import com.artem.task.dto.MovieDTOForSwagger;
 import com.artem.task.dto.MovieUpdateDTO;
 import com.artem.task.service.MovieService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,13 +37,13 @@ public class MovieController {
 
     //Создание нового фильма
     @PostMapping
-    public ResponseEntity<Void> createMovie(@RequestBody MovieCreateDTO movieCreateDTO) {
+    public ResponseEntity<Void> createMovie(@RequestBody @Valid MovieCreateDTO movieCreateDTO) {
         movieService.saveMovie(movieCreateDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     //Редактирование фильма
     @PutMapping()
-    public ResponseEntity<Void> updateMovie(@RequestBody MovieUpdateDTO movieUpdateDTO) {
+    public ResponseEntity<Void> updateMovie(@RequestBody @Valid MovieUpdateDTO movieUpdateDTO) {
         movieService.updateMovie(movieUpdateDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

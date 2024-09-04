@@ -3,6 +3,7 @@ package com.artem.task.controller;
 import com.artem.task.dto.GenreDTO;
 import com.artem.task.dto.GenreUpdateDTO;
 import com.artem.task.service.GenreService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +35,13 @@ public class GenreController {
     }
     //Создание жанра
     @PostMapping
-    public ResponseEntity<Void> createGenre(@RequestBody GenreDTO genreDTO) {
+    public ResponseEntity<Void> createGenre(@RequestBody @Valid GenreDTO genreDTO) {
         genreService.saveGenre(genreDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     //Редактирование жанра
     @PutMapping()
-    public ResponseEntity<Void> updateGenre(@RequestBody GenreUpdateDTO genreUpdateDTO) {
+    public ResponseEntity<Void> updateGenre(@RequestBody @Valid GenreUpdateDTO genreUpdateDTO) {
         genreService.updateGenre(genreUpdateDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

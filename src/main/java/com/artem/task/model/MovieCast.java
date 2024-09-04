@@ -1,8 +1,14 @@
 package com.artem.task.model;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class MovieCast {
+    @NotNull(message = "Id фильма не должно быть пустым")
     private Long movieId;
+    @NotNull(message = "Id актера не должно быть пустым")
     private Long actorId;
+    @Size(min = 1, max = 255, message = "Имя персонажа должно быть длиной от 1 до 255 символов")
     private String characterName;
 
     public MovieCast(){

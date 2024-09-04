@@ -1,8 +1,17 @@
 package com.artem.task.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class ActorDTO {
+    @Size(min = 2, max = 255, message = "Имя актера должно быть длиной от 2 до 255 символов")
     private String name;
+    @Size(min = 2, max = 255, message = "Фамилия актера должна быть длиной от 2 до 255 символов")
     private String lastName;
+    @Min(value = 0, message = "Возраст актера не может быть отрицательным")
+    @Max(value = 120, message = "Возраст актера не может превышать 120 лет")
     private int age;
 
     public ActorDTO() {}

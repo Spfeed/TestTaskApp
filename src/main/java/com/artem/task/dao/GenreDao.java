@@ -30,7 +30,7 @@ public class GenreDao {
         try{
             return jdbcTemplate.queryForObject(sql, new GenreRowMapper(), id);
         } catch (EmptyResultDataAccessException e) {
-            throw new GenreNotFoundException(id);
+            throw new EntityNotFoundException("Жанр" ,id);
         }
     }
     //Добавление жанра
@@ -43,7 +43,7 @@ public class GenreDao {
         String sql = "UPDATE genres SET name = ? WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, genre.getName(), genre.getId());
         if (rowsAffected == 0) {
-            throw new GenreNotFoundException(genre.getId());
+            throw new EntityNotFoundException("Жанр" ,genre.getId());
         }
     }
     //Удаление жанра по id
@@ -51,7 +51,7 @@ public class GenreDao {
         String sql = "DELETE FROM genres WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, id);
         if (rowsAffected == 0) {
-            throw new GenreNotFoundException(id);
+            throw new EntityNotFoundException("Жанр" ,id);
         }
     }
     //Поиск жанра по имени

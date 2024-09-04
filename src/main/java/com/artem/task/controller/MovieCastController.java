@@ -3,6 +3,7 @@ package com.artem.task.controller;
 import com.artem.task.dto.MovieCastDTO;
 import com.artem.task.model.MovieCast;
 import com.artem.task.service.MovieCastService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,13 +44,13 @@ public class MovieCastController {
     }
     //Создание нового персонажа
     @PostMapping
-    public ResponseEntity<Void> createCharacter(@RequestBody MovieCast movieCast) {
+    public ResponseEntity<Void> createCharacter(@RequestBody @Valid MovieCast movieCast) {
         movieCastService.saveCharacter(movieCast);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     //Редактирование персонажа
     @PutMapping()
-    public ResponseEntity<Void> updateCharacter(@RequestBody MovieCast movieCast) {
+    public ResponseEntity<Void> updateCharacter(@RequestBody @Valid MovieCast movieCast) {
         movieCastService.updateCharacter(movieCast);
         return new ResponseEntity<>(HttpStatus.OK);
     }

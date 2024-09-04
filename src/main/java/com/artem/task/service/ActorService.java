@@ -37,12 +37,16 @@ public class ActorService {
     }
     //Вывод одного по id
     public ActorDTO getActorById(Long id) {
-        Actor actor = actorDao.findById(id);
-        return new ActorDTO(
-                actor.getName(),
-                actor.getLastName(),
-                actor.getAge()
-        );
+        try {
+            Actor actor = actorDao.findById(id);
+            return new ActorDTO(
+                    actor.getName(),
+                    actor.getLastName(),
+                    actor.getAge()
+            );
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
 
     }
     //Создание актера
@@ -59,15 +63,23 @@ public class ActorService {
     }
     //Редактирование актера
     public void update(ActorUpdateDTO actorDTO) {
-        Actor actor = new Actor();
-        actor.setId(actorDTO.getId());
-        actor.setName(actorDTO.getName());
-        actor.setLastName(actorDTO.getLastName());
-        actor.setAge(actorDTO.getAge());
-        actorDao.update(actor);
+        try {
+            Actor actor = new Actor();
+            actor.setId(actorDTO.getId());
+            actor.setName(actorDTO.getName());
+            actor.setLastName(actorDTO.getLastName());
+            actor.setAge(actorDTO.getAge());
+            actorDao.update(actor);
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
     }
     //Удаление актера по id
     public void deleteActor(Long id) {
-        actorDao.delete(id);
+        try {
+            actorDao.delete(id);
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
     }
 }

@@ -5,6 +5,8 @@ import com.artem.task.dao.GenreDao;
 import com.artem.task.dao.MovieCastDao;
 import com.artem.task.dao.MovieDao;
 import com.artem.task.dto.*;
+import com.artem.task.exception.EntityAlreadyExistsException;
+import com.artem.task.exception.EntityNotFoundException;
 import com.artem.task.model.Actor;
 import com.artem.task.model.Movie;
 import com.artem.task.model.MovieCast;
@@ -48,40 +50,56 @@ public class MovieService {
     }
     //Вывод фильма по id (только для отладки)
     public MovieDTOForSwagger getMovieById(Long id) {
-        Movie movie = movieDao.findById(id);
-        return new MovieDTOForSwagger(
-                movie.getTitle(),
-                movie.getReleaseYear(),
-                movie.getDescription(),
-                genreDao.findById(movie.getGenreId()).getName(),
-                movie.getRating()
-        );
+        try {
+            Movie movie = movieDao.findById(id);
+            return new MovieDTOForSwagger(
+                    movie.getTitle(),
+                    movie.getReleaseYear(),
+                    movie.getDescription(),
+                    genreDao.findById(movie.getGenreId()).getName(),
+                    movie.getRating()
+            );
+        } catch (EntityNotFoundException e) {
+            throw e; //Перебрасываем исключение
+        }
     }
     //Создание фильма (уже не отладка)
     public void saveMovie(MovieCreateDTO movieCreateDTO) {
-        Movie movie = new Movie(
-          movieCreateDTO.getTitle(),
-          movieCreateDTO.getReleaseYear(),
-          movieCreateDTO.getDescription(),
-          movieCreateDTO.getGenreId(),
-          movieCreateDTO.getRating()
-        );
-        movieDao.save(movie);
+        try {
+            Movie movie = new Movie(
+                    movieCreateDTO.getTitle(),
+                    movieCreateDTO.getReleaseYear(),
+                    movieCreateDTO.getDescription(),
+                    movieCreateDTO.getGenreId(),
+                    movieCreateDTO.getRating()
+            );
+            movieDao.save(movie);
+        } catch (EntityAlreadyExistsException e) {
+            throw e;
+        }
     }
     //Редактирование фильма (уже не отладка)
     public void updateMovie(MovieUpdateDTO movieUpdateDTO) {
-        Movie movie = new Movie();
-        movie.setId(movieUpdateDTO.getId());
-        movie.setTitle(movieUpdateDTO.getTitle());
-        movie.setReleaseYear(movieUpdateDTO.getReleaseYear());
-        movie.setDescription(movieUpdateDTO.getDescription());
-        movie.setGenreId(movieUpdateDTO.getGenreId());
-        movie.setRating(movieUpdateDTO.getRating());
-        movieDao.update(movie);
+        try {
+            Movie movie = new Movie();
+            movie.setId(movieUpdateDTO.getId());
+            movie.setTitle(movieUpdateDTO.getTitle());
+            movie.setReleaseYear(movieUpdateDTO.getReleaseYear());
+            movie.setDescription(movieUpdateDTO.getDescription());
+            movie.setGenreId(movieUpdateDTO.getGenreId());
+            movie.setRating(movieUpdateDTO.getRating());
+            movieDao.update(movie);
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
     }
     //Удаление фильма (пока отладка)
     public void deleteMovie(Long id) {
-        movieDao.delete(id);
+        try {
+            movieDao.delete(id);
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
     }
 
     //Методы из задания

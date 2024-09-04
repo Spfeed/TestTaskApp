@@ -4,6 +4,7 @@ import com.artem.task.dao.GenreDao;
 import com.artem.task.dto.GenreDTO;
 import com.artem.task.dto.GenreUpdateDTO;
 import com.artem.task.exception.EntityAlreadyExistsException;
+import com.artem.task.exception.EntityNotFoundException;
 import com.artem.task.exception.GenreNotFoundException;
 import com.artem.task.model.Genre;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,14 @@ public class GenreService {
     }
     //Вывод жанра по id
     public GenreDTO getGenreById(Long id) {
-        Genre genre = genreDao.findById(id);
-        return new GenreDTO(
-                genre.getName()
-        );
+        try {
+            Genre genre = genreDao.findById(id);
+            return new GenreDTO(
+                    genre.getName()
+            );
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
     }
     //Создание нового жанра
     public void saveGenre(GenreDTO genreDTO) {
@@ -52,13 +57,21 @@ public class GenreService {
     }
     //Редактирование жанра
     public void updateGenre(GenreUpdateDTO genreUpdateDTO) {
-        Genre genre = new Genre();
-        genre.setId(genreUpdateDTO.getId());
-        genre.setName(genreUpdateDTO.getName());
-        genreDao.update(genre);
+        try {
+            Genre genre = new Genre();
+            genre.setId(genreUpdateDTO.getId());
+            genre.setName(genreUpdateDTO.getName());
+            genreDao.update(genre);
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
     }
     //Удаление жанра по id
     public void deleteGenre(Long id) {
-        genreDao.delete(id);
+        try {
+            genreDao.delete(id);
+        } catch (EntityNotFoundException e) {
+            throw e;
+        }
     }
 }

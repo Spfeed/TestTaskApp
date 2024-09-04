@@ -3,6 +3,7 @@ package com.artem.task.controller;
 import com.artem.task.dto.ActorDTO;
 import com.artem.task.dto.ActorUpdateDTO;
 import com.artem.task.service.ActorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +35,13 @@ public class ActorController {
     }
     //Создание актера
     @PostMapping
-    public ResponseEntity<Void> createActor(@RequestBody ActorDTO actorDTO) {
+    public ResponseEntity<Void> createActor(@RequestBody @Valid ActorDTO actorDTO) {
         actorService.saveActor(actorDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     //Редактирование существующего актера
     @PutMapping()
-    public ResponseEntity<Void> updateActor(@RequestBody ActorUpdateDTO actorUpdateDTO) {
+    public ResponseEntity<Void> updateActor(@RequestBody @Valid ActorUpdateDTO actorUpdateDTO) {
         actorService.update(actorUpdateDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
