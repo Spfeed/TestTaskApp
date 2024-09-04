@@ -2,6 +2,7 @@ package com.artem.task.service;
 
 import com.artem.task.dao.MovieCastDao;
 import com.artem.task.dto.MovieCastDTO;
+import com.artem.task.exception.MovieCastNotFoundException;
 import com.artem.task.model.MovieCast;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ public class MovieCastService {
     //Вывод персонажа по id фильма и актера
     public MovieCastDTO getCharacterByMovieIdAndActorId(Long movieId, Long actorId) {
         MovieCast movieCast = movieCastDao.findByMovieIdAndActorId(movieId, actorId);
+        if (movieCast == null) {
+            throw new MovieCastNotFoundException(movieId, actorId);
+        }
         return new MovieCastDTO(movieCast.getCharacterName());
     }
     //Вывод персонажей по id фильма

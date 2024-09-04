@@ -3,6 +3,8 @@ package com.artem.task.service;
 import com.artem.task.dao.ActorDao;
 import com.artem.task.dto.ActorDTO;
 import com.artem.task.dto.ActorUpdateDTO;
+import com.artem.task.exception.EntityAlreadyExistsException;
+import com.artem.task.exception.EntityNotFoundException;
 import com.artem.task.model.Actor;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,7 @@ public class ActorService {
                 actor.getLastName(),
                 actor.getAge()
         );
+
     }
     //Создание актера
     public void saveActor(ActorDTO actorDTO) {
@@ -49,6 +52,9 @@ public class ActorService {
                 actorDTO.getLastName(),
                 actorDTO.getAge()
         );
+        if (!actorDao.findByFullName(actorDTO.getName(), actorDTO.getLastName()).isEmpty()){
+            throw new EntityAlreadyExistsException("Актер", actor.getName() + " " + actor.getLastName());
+        }
         actorDao.save(actor);
     }
     //Редактирование актера

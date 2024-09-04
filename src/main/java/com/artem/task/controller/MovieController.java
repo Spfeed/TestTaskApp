@@ -65,24 +65,36 @@ public class MovieController {
     @GetMapping("/serviceFiltration/{keyword}")
     public ResponseEntity<List<MovieDTO>> getMoviesFilteredByTitleService(@PathVariable String keyword) {
         List<MovieDTO> movies = movieService.filterMoviesByTitleJavaStream(keyword);
+        if(movies.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); //Если нет фильмов с таким словом в названии, то возвращаем 402 статус-код
+        }
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
     //Фильтрация на уровне данных
     @GetMapping("/dataFiltration/{keyword}")
     public ResponseEntity<List<MovieDTO>> getMoviesFilteredByTitleData(@PathVariable String keyword) {
         List<MovieDTO> movies = movieService.filterMoviesByTitleMovieDao(keyword);
+        if (movies.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); //Аналогично 402, если фильмы с таким словом в названии не найдены
+        }
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
     //Фильтрация по жанрам
     @PostMapping("/filterByGenres")
     public ResponseEntity<List<MovieDTO>> getMoviesFilteredByGenres(@RequestBody List<String> genres) {
         List<MovieDTO> movies = movieService.getMoviesFilteredByGenres(genres);
+        if (movies.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); //Если фильмов с указанным(и) жанром(-ами) нет, то возвращаем 402 статус-код
+        }
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
     //Фильтрация по фамилии (имени и фамилии или имени актера)
     @GetMapping("/filterByActor/{actorName}")
     public ResponseEntity<List<MovieDTO>> getMoviesFilteredByActorName(@PathVariable String actorName) {
         List<MovieDTO> movies = movieService.getMoviesFilteredByActor(actorName);
+        if (movies.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); //Если нет фильмов с указанным именем и фамилией (именем или фамилией) актера, то возвращаем 402 статус-код
+        }
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 }

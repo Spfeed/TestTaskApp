@@ -1,6 +1,10 @@
 package com.artem.task.dao;
 
+import com.artem.task.exception.EntityNotFoundException;
+import com.artem.task.exception.GenreAlreadyExistsException;
+import com.artem.task.exception.GenreNotFoundException;
 import com.artem.task.model.Genre;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +27,11 @@ public class GenreDao {
     //Вывод жанра по id
     public Genre findById(Long id) {
         String sql = "SELECT * FROM genres WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new GenreRowMapper(), id);
+        try{
+            return jdbcTemplate.queryForObject(sql, new GenreRowMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new GenreNotFoundException(id);
+        }
     }
     //Добавление жанра
     public void save(Genre genre) {
@@ -33,11 +41,26 @@ public class GenreDao {
     //Обновление жанра
     public void update(Genre genre) {
         String sql = "UPDATE genres SET name = ? WHERE id = ?";
-        jdbcTemplate.update(sql, genre.getName(), genre.getId());
+        int rowsAffected = jdbcTemplate.update(sql, genre.getName(), genre.getId());
+        if (rowsAffected == 0) {
+            throw new GenreNotFoundException(genre.getId());
+        }
     }
     //Удаление жанра по id
     public void delete(Long id){
         String sql = "DELETE FROM genres WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        int rowsAffected = jdbcTemplate.update(sql, id);
+        if (rowsAffected == 0) {
+            throw new GenreNotFoundException(id);
+        }
+    }
+    //Поиск жанра по имени
+    public Genre findByName(String name) {
+        String sql = "SELECT * FROM genres WHERE name = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new GenreRowMapper(), name);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }

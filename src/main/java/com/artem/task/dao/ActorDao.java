@@ -1,6 +1,8 @@
 package com.artem.task.dao;
 
+import com.artem.task.exception.EntityNotFoundException;
 import com.artem.task.model.Actor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +24,12 @@ public class ActorDao {
     }
     //Поиск актера по id
     public Actor findById(Long id) {
-        String sql = "SELECT * FROM actors WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new ActorRowMapper(), id);
+        try {
+            String sql = "SELECT * FROM actors WHERE id = ?";
+            return jdbcTemplate.queryForObject(sql, new ActorRowMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new EntityNotFoundException("Актер", id);
+        }
     }
     //Создание актера
     public void save(Actor actor) {
@@ -33,12 +39,18 @@ public class ActorDao {
     //Обновление актера
     public void update(Actor actor) {
         String sql = "UPDATE actors SET name = ?, last_name = ?, age = ? WHERE id = ?";
-        jdbcTemplate.update(sql, actor.getName(), actor.getLastName(), actor.getAge(), actor.getId());
+        int updated = jdbcTemplate.update(sql, actor.getName(), actor.getLastName(), actor.getAge(), actor.getId());
+        if (updated == 0) {
+            throw new EntityNotFoundException("Актер", actor.getId());
+        }
     }
     //Удаление актера по id
     public void delete(Long id) {
         String sql = "DELETE FROM actors WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        int deleted = jdbcTemplate.update(sql, id);
+        if (deleted == 0) {
+            throw new EntityNotFoundException("Актер", id);
+        }
     }
     //Поиск по имени и фамилии
     public List<Actor> findByFullName(String firstName, String lastName) {

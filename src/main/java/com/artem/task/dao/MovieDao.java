@@ -1,7 +1,10 @@
 package com.artem.task.dao;
 
+import com.artem.task.exception.EntityAlreadyExistsException;
+import com.artem.task.exception.EntityNotFoundException;
 import com.artem.task.model.Movie;
 import com.artem.task.model.MovieCast;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -25,24 +28,39 @@ public class MovieDao {
     //Поиск фильма по id
     public Movie findById(Long id) {
         String sql = "SELECT * FROM movies WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new MovieRowMapper(), id);
+        try {
+            return jdbcTemplate.queryForObject(sql, new MovieRowMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+         throw new EntityNotFoundException("Фильм", id);
+        }
     }
     //Создание фильма
     public void save(Movie movie) {
         String sql = "INSERT INTO movies (title, release_year, description, genre_id, rating) VALUES (?, ?, ?, ?, ?)";
+        String checkSql = "SELECT COUNT(*) FROM movies WHERE title = ?";
+        Integer count = jdbcTemplate.queryForObject(checkSql, Integer.class, movie.getTitle());
+        if (count > 0) {
+            throw new EntityAlreadyExistsException("Фильм",movie.getTitle());
+        }
         jdbcTemplate.update(sql, movie.getTitle(), movie.getReleaseYear(), movie.getDescription(), movie.getGenreId(),
                 movie.getRating());
     }
     //Обновление информации о фильме
     public void update(Movie movie) {
         String sql = "UPDATE movies SET title = ?, release_year = ?, description = ?, genre_id = ?, rating = ? WHERE id = ?";
-        jdbcTemplate.update(sql, movie.getTitle(), movie.getReleaseYear(), movie.getDescription(), movie.getGenreId(),
+        int updated = jdbcTemplate.update(sql, movie.getTitle(), movie.getReleaseYear(), movie.getDescription(), movie.getGenreId(),
                 movie.getRating(), movie.getId());
+        if (updated == 0) {
+            throw new EntityNotFoundException("Фильм", movie.getId());
+        }
     }
     //Удаление фильма по его id
     public void delete(Long id) {
         String sql = "DELETE FROM movies WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        int deleted = jdbcTemplate.update(sql, id);
+        if (deleted == 0) {
+            throw new EntityNotFoundException("Фильм", id);
+        }
     }
     //Фильтрация фильмов по слову в названии
     public List<Movie> findByTitleContaining(String keyword)  {
