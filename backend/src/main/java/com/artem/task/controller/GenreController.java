@@ -2,6 +2,7 @@ package com.artem.task.controller;
 
 import com.artem.task.dto.GenreDTO;
 import com.artem.task.dto.GenreUpdateDTO;
+import com.artem.task.model.Genre;
 import com.artem.task.service.GenreService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -50,5 +51,10 @@ public class GenreController {
     public ResponseEntity<Void> deleteGenre(@PathVariable Long id) {
         genreService.deleteGenre(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/findByName/{genreName}")
+    public ResponseEntity<Genre> getGenreByName (@PathVariable String genreName){
+        Genre genre = genreService.getGenreByName(genreName);
+        return new ResponseEntity<>(genre, HttpStatus.OK);
     }
 }

@@ -185,6 +185,11 @@ public class MovieService {
         }
         return filteredMovies;
     }
+    //Поиск id фильма по названию
+    public Long getMovieIdByTitle(String title) {
+        Movie movie = movieDao.findByTitle(title);
+        return movie.getId();
+    }
 
     //Преобразование данных для отправки на внешний API
     private MovieDTO convertToMovieDTO(Movie movie) {

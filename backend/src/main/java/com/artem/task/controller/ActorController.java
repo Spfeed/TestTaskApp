@@ -2,6 +2,7 @@ package com.artem.task.controller;
 
 import com.artem.task.dto.ActorDTO;
 import com.artem.task.dto.ActorUpdateDTO;
+import com.artem.task.model.Actor;
 import com.artem.task.service.ActorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -50,5 +51,12 @@ public class ActorController {
     public ResponseEntity<Void> deleteActor(@PathVariable Long id) {
         actorService.deleteActor(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    //Поиск актера по имени, фамилии и возрасту
+    @GetMapping("/name/{name}/lastName/{lastName}/age/{age}")
+    public ResponseEntity<Actor> getActorByAllFields(@PathVariable String name,
+                                                     @PathVariable String lastName, @PathVariable int age) {
+        Actor actor = actorService.getActorByNameLastNameAndAge(name, lastName, age);
+        return new ResponseEntity<>(actor, HttpStatus.OK);
     }
 }

@@ -68,4 +68,9 @@ public class MovieDao {
         String query = "%" + keyword + "%";//Обеспечение поиска в любом месте строки
         return jdbcTemplate.query(sql, new MovieRowMapper(), query);
     }
+    //Поиск фильма по названию
+    public Movie findByTitle(String title) {
+        String sql = "SELECT * FROM movies WHERE title = ?";
+        return jdbcTemplate.queryForObject(sql, new MovieRowMapper(), title);
+    }
 }

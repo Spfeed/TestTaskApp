@@ -82,4 +82,8 @@ public class ActorService {
             throw e;
         }
     }
+    //Поиск актера по имени, фамилии и возрасту
+    public Actor getActorByNameLastNameAndAge (String name, String lastName, int age) {
+        return actorDao.findByNameAndLastNameAndAge(name, lastName, age);
+    }
 }

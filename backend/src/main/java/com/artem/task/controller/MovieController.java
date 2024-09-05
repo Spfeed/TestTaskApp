@@ -98,4 +98,10 @@ public class MovieController {
         }
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
+    //Поиск id фильма по его названию
+    @GetMapping("/findByTitle/{title}")
+    public ResponseEntity<Long> getMovieIdByTitle(@PathVariable String title) {
+        Long movieId = movieService.getMovieIdByTitle(title);
+        return new ResponseEntity<>(movieId, HttpStatus.OK);
+    }
 }

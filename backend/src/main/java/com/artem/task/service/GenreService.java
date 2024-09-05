@@ -74,4 +74,8 @@ public class GenreService {
             throw e;
         }
     }
+    //Поиск жанра по имени
+    public Genre getGenreByName(String name) {
+        return genreDao.findByName(name);
+    }
 }

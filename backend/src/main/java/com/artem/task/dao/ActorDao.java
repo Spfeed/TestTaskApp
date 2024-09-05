@@ -67,4 +67,9 @@ public class ActorDao {
         String sql = "SELECT * FROM actors WHERE LOWER (last_name) = LOWER (?)";
         return jdbcTemplate.query(sql, new ActorRowMapper(), lastName);
     }
+    //Поиск по имени, фамилии и возрасту
+    public Actor findByNameAndLastNameAndAge(String name, String lastName, int age) {
+        String sql = "SELECT * FROM actors WHERE LOWER (name) = LOWER (?) AND LOWER (last_name) = LOWER (?) AND age = ?";
+        return jdbcTemplate.queryForObject(sql, new ActorRowMapper(), name, lastName, age);
+    }
 }
