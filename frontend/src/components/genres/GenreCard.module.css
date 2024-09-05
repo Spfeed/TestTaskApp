@@ -1,0 +1,10 @@
+.container {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 1px 2px 39px rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.genre {
+  font-size: 24px;
+}

@@ -1,0 +1,22 @@
+.sidebar {
+  position: fixed; /* Фиксированное расположение слева */
+  top: -10;
+  left: 0;
+  width: 250px; /* Ширина сайдбара */
+  height: 100vh; /* Высота сайдбара на весь экран */
+  background-color: #f8f9fa; /* Фоновый цвет сайдбара */
+  padding: 20px; /* Внутренний отступ */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Тень сайдбара */
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.container {
+  margin-bottom: 10px;
+}
+
+.searchbutton {
+  margin-top: 10px;
+}

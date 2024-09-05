@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+}
+
+.cards {
+  margin-left: 20%;
+}
+
+.cardsTitle {
+  margin-left: 40%;
+}
+
+.cardsContainer {
+  margin-top: 40px;
+}
