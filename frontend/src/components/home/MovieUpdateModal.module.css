@@ -1,0 +1,83 @@
+.inputGroup {
+  margin-top: 15px;
+}
+
+.input {
+  border-radius: 15px;
+  padding-left: 10px;
+}
+
+.submitButtonContainer {
+  background-color: rgb(45, 0, 128);
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transition: 0.4s ease-in-out;
+  width: 100px;
+}
+
+.submitButtonContainer:hover {
+  background-color: #3e5b8e;
+}
+
+.submitButton,
+.cancelButton {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  padding: 5px 5px 5px 10px;
+  font-size: 14px;
+  color: white;
+  transition: 0.4s ease-in-out;
+}
+
+.submitButton:hover,
+.cancelButton:hover {
+  color: #000;
+}
+.errorMessage {
+  color: red;
+}
+
+.cancelButtonContainer {
+  background-color: rgb(116, 37, 57);
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transition: 0.4s ease-in-out;
+  width: 80px;
+}
+
+.cancelButtonContainer:hover {
+  background-color: rgb(115, 92, 97);
+}
+
+.addCharacterButtonContainer {
+  background-color: rgb(8, 64, 20);
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transition: 0.4s ease-in-out;
+  width: 160px;
+}
+
+.addCharacterButtonContainer:hover {
+  background-color: rgb(23, 182, 58);
+}
+
+.addCharacterButton {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  padding: 5px 5px 5px 10px;
+  font-size: 14px;
+  color: white;
+  transition: 0.4s ease-in-out;
+}
+
+.addCharacterButton:hover {
+  color: #000;
+}

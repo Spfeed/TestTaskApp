@@ -1,17 +1,5 @@
-.container {
+.titleAndCreate {
   display: flex;
-}
-
-.cards {
-  margin-left: 20%;
-}
-
-.cardsTitle {
-  margin-left: 40%;
-}
-
-.cardsContainer {
-  margin-top: 40px;
 }
 
 .createButtonContainer {
@@ -19,8 +7,7 @@
   border-radius: 15px;
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   transition: 0.4s ease-in-out;
-  margin-left: 42%;
-  width: 100px;
+  margin-left: 100px;
 }
 
 .createButtonContainer:hover {

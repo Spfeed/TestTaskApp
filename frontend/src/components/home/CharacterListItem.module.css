@@ -1,0 +1,34 @@
+.characterListItem {
+  margin-top: 10px;
+  display: flex;
+  column-gap: 20px;
+}
+
+.deleteButtonContainer {
+  background-color: rgb(116, 37, 57);
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transition: 0.4s ease-in-out;
+  width: 80px;
+}
+
+.deleteButtonContainer:hover {
+  background-color: rgb(120, 82, 91);
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  padding: 5px 5px 5px 10px;
+  font-size: 14px;
+  color: white;
+  transition: 0.4s ease-in-out;
+}
+
+.deleteButton:hover {
+  color: black;
+}

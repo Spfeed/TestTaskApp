@@ -30,3 +30,57 @@
 .characterName {
   padding-left: 20px;
 }
+
+.updateButtonContainer {
+  background-color: rgb(40, 40, 110);
+  border-radius: 15px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transition: 0.4s ease-in-out;
+}
+
+.updateButtonContainer:hover {
+  background-color: rgb(99, 99, 99);
+}
+
+.updateButton,
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  padding: 5px 5px 0px 5px;
+  font-size: 14px;
+  color: white;
+  transition: 0.4s ease-in-out;
+}
+
+.updateButton:hover,
+.deleteButton:hover {
+  color: rgb(0, 0, 0);
+}
+
+.deleteButtonContainer {
+  background-color: rgb(169, 10, 10);
+  border-radius: 15px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transition: 0.4s ease-in-out;
+}
+
+.deleteButtonContainer:hover {
+  background-color: rgb(155, 155, 155);
+}
+
+.errorMessage {
+  color: red;
+}
+
+.titleAndButtons {
+  display: grid;
+}
+
+.buttons {
+  display: flex;
+  margin-left: 30%;
+}
