@@ -59,4 +59,10 @@ public class ActorController {
         Actor actor = actorService.getActorByNameLastNameAndAge(name, lastName, age);
         return new ResponseEntity<>(actor, HttpStatus.OK);
     }
+
+    @GetMapping("/allWithIds")
+    public ResponseEntity<List<Actor>> getAllActorsWithIds() {
+        List<Actor> actors = actorService.getAllActorsWithIds();
+        return new ResponseEntity<>(actors, HttpStatus.OK);
+    }
 }

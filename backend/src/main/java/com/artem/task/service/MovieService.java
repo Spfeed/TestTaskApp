@@ -194,7 +194,12 @@ public class MovieService {
     //Преобразование данных для отправки на внешний API
     private MovieDTO convertToMovieDTO(Movie movie) {
         //Получение названия жанра фильма
-        String genre = genreDao.findById(movie.getGenreId()).getName();
+        String genre;
+        try {
+            genre = genreDao.findById(movie.getGenreId()).getName();
+        } catch (EntityNotFoundException e) {
+            genre = "Жанр не указан";
+        }
 
         //Получение списка актеров фильма и их ролей
         List<MovieCast> movieCasts = movieCastDao.findByMovieId(movie.getId());

@@ -56,7 +56,7 @@ public class GenreDao {
     }
     //Поиск жанра по имени
     public Genre findByName(String name) {
-        String sql = "SELECT * FROM genres WHERE name = ?";
+        String sql = "SELECT * FROM genres WHERE LOWER (name) = LOWER (?)";
         try {
             return jdbcTemplate.queryForObject(sql, new GenreRowMapper(), name);
         } catch (EmptyResultDataAccessException e) {

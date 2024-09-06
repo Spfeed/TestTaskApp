@@ -31,16 +31,9 @@
             return new MovieCastDTO(movieCast.getCharacterName());
         }
         //Вывод персонажей по id фильма
-        public List<MovieCastDTO> getCharactersByMovieId(Long movieId) {
+        public List<MovieCast> getCharactersByMovieId(Long movieId) {
             List<MovieCast> movieCharacters = movieCastDao.findByMovieId(movieId);
-            List<MovieCastDTO> movieCastDTOS = new ArrayList<>();
-            for (MovieCast movieCast : movieCharacters) {
-                MovieCastDTO movieCastDTO = new MovieCastDTO(
-                        movieCast.getCharacterName()
-                );
-                movieCastDTOS.add(movieCastDTO);
-            }
-            return movieCastDTOS;
+            return movieCharacters;
         }
         //Вывод всех персонажей, сыгранных актером с введеным id
         public List<MovieCastDTO> getCharactersByActorId(Long actorId) {

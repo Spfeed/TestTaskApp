@@ -30,9 +30,9 @@ public class MovieCastController {
     }
     //Вывод персонажей фильма
     @GetMapping("/movie/{movieId}")
-    public ResponseEntity<List<MovieCastDTO>> getCharactersByMovieId(
+    public ResponseEntity<List<MovieCast>> getCharactersByMovieId(
             @PathVariable Long movieId) {
-        List<MovieCastDTO> chatacters = movieCastService.getCharactersByMovieId(movieId);
+        List<MovieCast> chatacters = movieCastService.getCharactersByMovieId(movieId);
         return new ResponseEntity<>(chatacters, HttpStatus.OK);
     }
     //Вывод всех персонажей, сыгранных актером

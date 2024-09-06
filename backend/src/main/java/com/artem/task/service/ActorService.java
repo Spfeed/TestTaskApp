@@ -86,4 +86,8 @@ public class ActorService {
     public Actor getActorByNameLastNameAndAge (String name, String lastName, int age) {
         return actorDao.findByNameAndLastNameAndAge(name, lastName, age);
     }
+
+    public List<Actor> getAllActorsWithIds() {
+        return actorDao.findAll();
+    }
 }
