@@ -1,0 +1,28 @@
+{
+  "id": null,
+  "uid": "request-dashboard",
+  "title": "Requests count",
+  "tags": [],
+  "timezone": "browser",
+  "schemaVersion": 16,
+  "version": 1,
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Requests count",
+      "targets": [
+        {
+          "expr": "sum(http_server_requests_seconds_count)",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "datasource": "Prometheus",
+      "format": "short",
+      "valueMaps": [],
+      "thresholds": []
+    }
+  ]
+}

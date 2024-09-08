@@ -1,0 +1,33 @@
+{
+  "id": null,
+  "uid": "memory-dashboard",
+  "title": "Memory usage",
+  "tags": [],
+  "timezone": "browser",
+  "schemaVersion": 16,
+  "version": 1,
+  "panels": [
+    {
+      "id": 1,
+      "type": "gauge",
+      "title": "Memory usage",
+      "targets": [
+        {
+          "expr": "(sum(jvm_memory_used_bytes{area=\"heap\"}) + sum(jvm_memory_used_bytes{area=\"nonheap\"})) / (sum(jvm_memory_max_bytes{area=\"heap\"}) + sum(jvm_memory_max_bytes{area=\"nonheap\"})) * 100",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "datasource": "Prometheus",
+      "format": "percent",
+      "valueMaps": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "value": 80
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": null,
+  "uid": "cpu-dashboard",
+  "title": "CPU usage",
+  "tags": [],
+  "timezone": "browser",
+  "schemaVersion": 16,
+  "version": 1,
+  "panels": [
+    {
+      "id": 1,
+      "type": "gauge",
+      "title": "CPU usage",
+      "targets": [
+        {
+          "expr": "process_cpu_usage * 100",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "datasource": "Prometheus",
+      "format": "percent",
+      "valueMaps": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "value": 80
+        }
+      ]
+    }
+  ]
+}
