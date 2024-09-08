@@ -4,7 +4,7 @@
 
 Для установки перейдите в пустую директорию и ввдите команду `git clone https://github.com/Spfeed/TestTaskApp`;
 
-Установите Docker Desktop: [https://www.docker.com/products/docker-desktop/](Docker desktop);
+Установите Docker Desktop: [Docker desktop](https://www.docker.com/products/docker-desktop/);
 
 Если вы работаете в linux введите команду `sudo apt-get docker`.
 
@@ -22,11 +22,11 @@
 
 Контейнеры работают по следующим адресам:
 
-- Backend: [http://localhost:8080/]([http://localhost:8080/);
-- Frontend: [http://localhost:3000/]([http://localhost:3000/);
-- Prometheus: [http://localhost:9090/]([http://localhost:9090/);
-- Grafana: [http://localhost:3001/](http://localhost:3001/);
-- Postgres: [http://localhost:5432/]([http://localhost:5432/).
+- Backend: [http://localhost:8080]([http://localhost:8080/);
+- Frontend: [http://localhost:3000]([http://localhost:3000/);
+- Prometheus: [http://localhost:9090]([http://localhost:9090/);
+- Grafana: [http://localhost:3001](http://localhost:3001/);
+- Postgres: [http://localhost:5432]([http://localhost:5432/).
 
 Проверьте доступность контейнеров при помощи ввдения адресов в строку поиска браузера.
 В случае проверки postgres попробуйте добавить новый сервер в PgAdmin с адресом `http://postgres:5432` (логин и пароль указаны в файле `application.yml` директории `backend`).
@@ -43,11 +43,11 @@
 
 ### Приложение
 
-Для использования приложение перейдите по адресу [http://localhost:3000/]([http://localhost:3000/).
+Для использования приложение перейдите по адресу [http://localhost:3000]([http://localhost:3000/).
 
 ### Grafana
 
-Для просмотра метрик перейдите по адресу [http://localhost:3001/](http://localhost:3001/).
+Для просмотра метрик перейдите по адресу [http://localhost:3001](http://localhost:3001/).
 Вас попросят ввести логин и пароль: ввдете `username: admin, password: admin`;
 Далее вы можете поменять пароль на свой.
 
@@ -57,9 +57,8 @@
 
 ## Продолжение разработки
 
-Вы можете продолжить разработку проекта для этого вам потребуется скачать Intellij IDEA: [https://www.jetbrains.com/idea/download/?section=windows](Intellij IDEA);
-
-Также скачать VSCode: [https://code.visualstudio.com/download](VsCode);
+Вы можете продолжить разработку проекта для этого вам потребуется скачать Intellij IDEA: [Intellij IDEA](https://www.jetbrains.com/idea/download/?section=windows);
+Также скачать VSCode: [VsCode](https://code.visualstudio.com/download);
 
 ### Backend
 
